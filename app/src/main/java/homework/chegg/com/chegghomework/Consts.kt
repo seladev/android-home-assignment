@@ -5,4 +5,9 @@ object Consts {
     const val DATA_SOURCE_A_URL = BASE_URL + "android_homework_datasourceA.json"
     const val DATA_SOURCE_B_URL = BASE_URL + "android_homework_datasourceB.json"
     const val DATA_SOURCE_C_URL = BASE_URL + "android_homework_datasourceC.json"
+
+    const val CACHE_CONTROL_HEADER = "Cache-Control"
+    const val MAX_AGO = "max-age="
+
+
 }

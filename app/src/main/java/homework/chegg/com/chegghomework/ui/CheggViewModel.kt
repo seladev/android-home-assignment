@@ -58,7 +58,6 @@ class CheggViewModel : ViewModel() {
 
     fun loadDataSourceA(): Observable<MutableList<CheggDataModel>>? {
         return CheggRepository.getDataSourceA()
-            .delaySubscription(5, TimeUnit.SECONDS)
             .flatMap {
                 val cheggDataModelList = mutableListOf<CheggDataModel>()
 
@@ -77,7 +76,6 @@ class CheggViewModel : ViewModel() {
 
     fun loadDataSourceB(): Observable<MutableList<CheggDataModel>>? {
         return CheggRepository.getDataSourceB()
-            .delaySubscription(30, TimeUnit.SECONDS)
             .flatMap {
                 val cheggDataModelList = mutableListOf<CheggDataModel>()
 
@@ -96,7 +94,6 @@ class CheggViewModel : ViewModel() {
 
     fun loadDataSourceC(): Observable<MutableList<CheggDataModel>>? {
         return CheggRepository.getDataSourceC()
-            .delaySubscription(60, TimeUnit.SECONDS)
             .flatMap {
                 val cheggDataModelList = mutableListOf<CheggDataModel>()
 

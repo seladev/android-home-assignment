@@ -1,5 +1,7 @@
 package homework.chegg.com.chegghomework.network
 
+import homework.chegg.com.chegghomework.App
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,7 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 object CheggRetrofitService {
 
     const val BASE_URL = "https://chegg-mobile-promotions.cheggcdn.com/android/homework/"
+    const val CACHE_SIZE = (5 * 1024 * 1024).toLong()
 
+    val cache = Cache(App.context.cacheDir, CACHE_SIZE)
     /**
      * Http log - when making  request show the request in logcat
      */
@@ -26,6 +30,8 @@ object CheggRetrofitService {
 
 
     private val client = OkHttpClient.Builder().apply {
+        cache(cache)
+        addNetworkInterceptor(CacheInterceptor())
         addInterceptor(logInterceptor)
     }.build()
 
