@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
         mViewModel.getCheggData().observe(this) { cheggData ->
             mCheggAdapter?.mData = cheggData
         }
+
+        mViewModel.getErrorLiveData().observe(this){
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

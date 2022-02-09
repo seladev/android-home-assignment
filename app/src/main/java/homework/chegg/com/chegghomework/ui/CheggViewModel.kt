@@ -1,5 +1,6 @@
 package homework.chegg.com.chegghomework.ui
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +19,10 @@ import java.util.concurrent.TimeUnit
  */
 class CheggViewModel : ViewModel() {
 
+    companion object {
+        private const val TAG = "CheggViewModel"
+    }
+
     private val compositeDisposable = CompositeDisposable()
 
     private val cheggData: MutableLiveData<List<CheggDataModel>> by lazy {
@@ -29,6 +34,10 @@ class CheggViewModel : ViewModel() {
     fun getCheggData(): LiveData<List<CheggDataModel>> {
         return cheggData
     }
+
+    private val errorLiveData: MutableLiveData<String> = MutableLiveData()
+    fun getErrorLiveData(): LiveData<String> = errorLiveData
+
 
     fun loadData() {
         compositeDisposable.add(
@@ -49,7 +58,9 @@ class CheggViewModel : ViewModel() {
                 .subscribe({
                     cheggData.value = it
                 }, {
-
+                    Log.e(Companion.TAG, "error loadData: "+it.localizedMessage )
+                    cheggData.value = emptyList()
+                    errorLiveData.value = it.localizedMessage
                 })
         )
 
